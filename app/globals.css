@@ -1,26 +1,437 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ============================================================================
+   AI Paglu design system
+
+   Nothing below names a colour twice. Components only ever reference semantic
+   tokens (bg-raised, text-muted, border-rule, text-accent…), so a whole new
+   palette is ~20 lines at the bottom of the PALETTES block and needs no
+   component changes.
+
+   Selection:  html[data-palette]  x  html[data-theme]  x  html[data-layout]
+   ========================================================================= */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-raised: var(--raised);
+  --color-sunken: var(--sunken);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-rule: var(--rule);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-contrast: var(--accent-contrast);
+  --color-accent-2: var(--accent-2);
+  --color-code: var(--code);
+
+  --color-series-1: var(--series-1);
+  --color-series-2: var(--series-2);
+  --color-series-3: var(--series-3);
+  --color-series-4: var(--series-4);
+  --color-series-5: var(--series-5);
+
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-body: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", Menlo, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ============================================================================
+   PALETTES
+   ========================================================================= */
+
+/* --- ink · Ink & Oxide --------------------------------------------------- */
+:root,
+[data-palette="ink"] {
+  --bg: #faf7f1;
+  --raised: #ffffff;
+  --sunken: #f1ece1;
+  --ink: #17140f;
+  --muted: #645c4e;
+  --faint: #948b7c;
+  --rule: #e3dbcb;
+  --accent: #c4451c;
+  --accent-soft: #faebe3;
+  --accent-contrast: #ffffff;
+  --accent-2: #1f6f63;
+  --code: #f4efe5;
+}
+
+[data-theme="dark"],
+[data-palette="ink"][data-theme="dark"] {
+  --bg: #14120e;
+  --raised: #1d1a15;
+  --sunken: #0f0d0a;
+  --ink: #ede7db;
+  --muted: #a39a89;
+  --faint: #756d5f;
+  --rule: #2c271e;
+  --accent: #ff7043;
+  --accent-soft: #2e1c13;
+  --accent-contrast: #1a0e08;
+  --accent-2: #54c8b3;
+  --code: #1a1712;
+}
+
+/* --- moss · Moss & Clay -------------------------------------------------- */
+[data-palette="moss"] {
+  --bg: #f5f4ee;
+  --raised: #ffffff;
+  --sunken: #ebeae0;
+  --ink: #171c13;
+  --muted: #5c6555;
+  --faint: #8b9484;
+  --rule: #dcddce;
+  --accent: #b0512e;
+  --accent-soft: #f7e8e0;
+  --accent-contrast: #ffffff;
+  --accent-2: #3b7551;
+  --code: #efeee4;
+}
+
+[data-palette="moss"][data-theme="dark"] {
+  --bg: #0f120e;
+  --raised: #171c14;
+  --sunken: #0a0d09;
+  --ink: #e6eadf;
+  --muted: #97a08f;
+  --faint: #6a7364;
+  --rule: #242a20;
+  --accent: #e68a5c;
+  --accent-soft: #2a1b12;
+  --accent-contrast: #14100c;
+  --accent-2: #6fc490;
+  --code: #141810;
+}
+
+/* --- dusk · Indigo Dusk -------------------------------------------------- */
+[data-palette="dusk"] {
+  --bg: #f7f5f0;
+  --raised: #ffffff;
+  --sunken: #edeae1;
+  --ink: #151a3c;
+  --muted: #565c80;
+  --faint: #8a8fac;
+  --rule: #dedae4;
+  --accent: #a9680a;
+  --accent-soft: #faf0da;
+  --accent-contrast: #ffffff;
+  --accent-2: #16776c;
+  --code: #f0ede4;
+}
+
+[data-palette="dusk"][data-theme="dark"] {
+  --bg: #0e1230;
+  --raised: #161c40;
+  --sunken: #090c24;
+  --ink: #f0ebdd;
+  --muted: #979dc2;
+  --faint: #6b719a;
+  --rule: #23294f;
+  --accent: #f2ab43;
+  --accent-soft: #2a2140;
+  --accent-contrast: #17120a;
+  --accent-2: #45c4b3;
+  --code: #121739;
+}
+
+/* --- slate · Slate & Cyan ------------------------------------------------ */
+[data-palette="slate"] {
+  --bg: #f6f8f8;
+  --raised: #ffffff;
+  --sunken: #ebeff0;
+  --ink: #0e1519;
+  --muted: #515d64;
+  --faint: #84929a;
+  --rule: #dae1e4;
+  --accent: #0a6a73;
+  --accent-soft: #dceff1;
+  --accent-contrast: #ffffff;
+  --accent-2: #b54415;
+  --code: #eff3f4;
+}
+
+[data-palette="slate"][data-theme="dark"] {
+  --bg: #0a0f12;
+  --raised: #121a1c;
+  --sunken: #060a0c;
+  --ink: #e2e9eb;
+  --muted: #8c9aa1;
+  --faint: #606e75;
+  --rule: #1c2528;
+  --accent: #35d6c4;
+  --accent-soft: #0e2b2b;
+  --accent-contrast: #04191a;
+  --accent-2: #fb9350;
+  --code: #0e1517;
+}
+
+/* --- chart series ---------------------------------------------------------
+   One validated categorical set per mode, shared by every palette. A series'
+   colour follows the entity it encodes, not the theme — so switching palette
+   must not repaint the lines. Both sets pass the six checks (lightness band,
+   chroma floor, CVD separation, normal-vision floor, contrast) against the
+   lightest and darkest surface any palette uses.
+   Charts of a single series use --accent instead; sequential ramps (heatmaps)
+   are mixed from --accent, one hue, light to dark.
+   ------------------------------------------------------------------------ */
+:root {
+  --series-1: #d1410f;
+  --series-2: #047857;
+  --series-3: #b45309;
+  --series-4: #1d4ed8;
+  --series-5: #be185d;
+}
+
+[data-theme="dark"] {
+  --series-1: #e8603a;
+  --series-2: #0d9e80;
+  --series-3: #b8862a;
+  --series-4: #5a86dd;
+  --series-5: #cc5f96;
+}
+
+/* ============================================================================
+   LAYOUT VARIANTS
+
+   editorial — one centred reading column, generous rhythm, lead article.
+   atlas     — wider canvas, persistent topic rail, tighter rows, scannable.
+   ========================================================================= */
+
+:root {
+  --page-max: 74rem;
+  --prose-max: 40rem;
+  --rhythm: 1;
+  --display-scale: 1;
+  --card-radius: 2px;
+}
+
+[data-layout="atlas"] {
+  --page-max: 88rem;
+  --prose-max: 44rem;
+  --rhythm: 0.68;
+  --display-scale: 0.84;
+  --card-radius: 2px;
+}
+
+.page {
+  width: 100%;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .page {
+    padding-inline: 2rem;
   }
 }
 
+.prose-col {
+  max-width: var(--prose-max);
+}
+
+/* Section rhythm scales with the layout variant. */
+.band {
+  padding-block: calc(4.5rem * var(--rhythm));
+}
+.band-tight {
+  padding-block: calc(2.75rem * var(--rhythm));
+}
+
+/* Show one variant's markup, hide the other's. No JS, no flash.
+   Only ever sets `display: none` — the visible element keeps whatever display
+   its own classes give it, so a variant can be a grid or a flex row. */
+:root:not([data-layout="atlas"]) .only-atlas {
+  display: none;
+}
+:root[data-layout="atlas"] .only-editorial {
+  display: none;
+}
+
+/* The atlas rail only exists in atlas layout, and only on wide screens. */
+.with-rail {
+  display: block;
+}
+@media (min-width: 1024px) {
+  [data-layout="atlas"] .with-rail {
+    display: grid;
+    grid-template-columns: 14rem minmax(0, 1fr);
+    gap: 3.5rem;
+    align-items: start;
+  }
+}
+.rail {
+  display: none;
+}
+@media (min-width: 1024px) {
+  [data-layout="atlas"] .rail {
+    display: block;
+    position: sticky;
+    top: 5.5rem;
+  }
+}
+
+/* ============================================================================
+   BASE
+   ========================================================================= */
+
+html {
+  background: var(--bg);
+  color-scheme: light;
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 1.125rem;
+  }
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+a {
+  color: inherit;
+}
+
+hr {
+  border-color: var(--rule);
+}
+
+/* Display type: Fraunces, tuned. The optical-size axis is what makes big
+   headings feel drawn rather than scaled. */
+.display {
+  font-family: var(--font-display);
+  font-variation-settings: "SOFT" 0, "WONK" 1, "opsz" 40;
+  font-weight: 600;
+  letter-spacing: -0.018em;
+  line-height: 1.06;
+}
+
+.display-hero {
+  font-size: clamp(2.3rem, 7.2vw, calc(4.3rem * var(--display-scale)));
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* A hairline that survives every palette in both modes. */
+.rule-t {
+  border-top: 1px solid var(--rule);
+}
+.rule-b {
+  border-bottom: 1px solid var(--rule);
+}
+
+/* The faint graph-paper ground. Present, never noticed. */
+.grid-ground {
+  background-image:
+    linear-gradient(to right, var(--rule) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--rule) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 0%, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 0%, transparent 75%);
+  opacity: 0.55;
+}
+
+/* Underline that grows from the left on hover — used on every index row. */
+.link-underline {
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  transition: background-size 220ms cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.link-underline:hover,
+a:hover .link-underline,
+a:focus-visible .link-underline {
+  background-size: 100% 1px;
+}
+
+/* ============================================================================
+   PROSE
+   ========================================================================= */
+
+.prose-body > * + * {
+  margin-top: 1.35em;
+}
+
+.prose-body h2 {
+  margin-top: calc(2.9em * var(--rhythm));
+}
+
+.prose-body a:not(.no-prose-link) {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in oklab, var(--accent) 42%, transparent);
+}
+.prose-body a:not(.no-prose-link):hover {
+  text-decoration-color: var(--accent);
+}
+
+/* Entrance: one staggered reveal per page, nothing more. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 640ms cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
